@@ -26,7 +26,7 @@ public class ExcelService {
 		log.info("Writing {} records in Excel ", attendaceList.size());
 		try{
 			String property = System.getProperty("user.dir");
-			InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("attendanceformat.xlsx");
+			InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("atendance_format_mod.xlsx");
 			String time = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE);
 			String path = property+ FileSystems.getDefault().getSeparator() + "output-"+ time + "-" + RandomStringUtils.randomAlphanumeric(4)+".xlsx";
 			FileOutputStream out = new FileOutputStream(path);
@@ -44,6 +44,30 @@ public class ExcelService {
 		}
 
 	}
+
+	/*public void createExcelFile(List<AttendanceDetails> attendaceList) {
+		log.info("Writing {} records in Excel ", attendaceList.size());
+		try{
+			String property = System.getProperty("user.dir");
+			InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("atendance_format_mod.xlsx");
+			String time = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+			String path = property+ FileSystems.getDefault().getSeparator() + "output-"+ time + "-" + RandomStringUtils.randomAlphanumeric(4)+".xlsx";
+			FileOutputStream out = new FileOutputStream(path);
+			XSSFWorkbook workbook = (XSSFWorkbook) WorkbookFactory.create(inputStream);
+			XSSFSheet attendanceSheet = workbook.getSheetAt(1);
+			writeData(attendanceSheet, attendaceList,workbook);
+			workbook.write(out);
+			log.info("Complete creating file, sending data by Email");
+			inputStream.close();
+			workbook.close();
+			//new ByteArrayInputStream(out.toByteArray());
+		}catch (IOException ioException){
+			log.error("Exception caught : {}", ioException.getMessage());
+
+		}
+
+	}*/
+
 
 	private void writeData(XSSFSheet attendanceSheet, List<AttendanceDetails> attendaceList, XSSFWorkbook workbook) {
 		//clearPreviousdataIfAny(attendanceSheet);
